@@ -1,0 +1,27 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple pie chart with labels.",
+  "data": {
+    "values": [
+      {"category": "Public administration and safety", "value": 31.2},
+      {"category": "Education and training", "value": 31.1},
+      {"category": "Health care and social assistance", "value": 26.6},
+      {"category": "Other industries", "value": 11.1}
+    ]
+  },
+  "encoding": {
+    "theta": {"field": "value", "type": "quantitative", "stack": true},
+    "color": {"field": "category", "type": "nominal","title": "Industry",          "scale": {
+      "range": ["#14213d","#ffe6a1","#e09f3e","#9e2a2b"],
+      "type": "sequential" 
+      
+  }}
+  },
+  "layer": [{
+    "mark": {"type": "arc", "outerRadius": 110,"color":"#14213d","fontSize": 15}
+  }],
+  "config": {
+    "legend": {"labelFontSize":11},
+    "view": {"stroke": null}
+  }
+}

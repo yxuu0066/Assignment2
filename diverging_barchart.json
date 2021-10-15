@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": { "url": "https://raw.githubusercontent.com/yxuu0066/FIT3179_HW10/main/Industry_sector.csv"},
+  "transform": [
+    {"calculate": "datum.status == 2 ? 'negative' : 'positive'", "as": "trend"}
+  ],
+  "spacing": 0,
+  "hconcat": [ {
+    "width": 120,
+    "view": {"stroke": null},
+    "mark": {
+      "type": "text",
+      "align": "left",
+      "fontSize": 15
+    },
+    "encoding": {
+      "y": {"field": "Industry", "type": "nominal", "axis": null},
+      "text": {"field": "Industry", "type": "nominal"}
+    }
+  }, {
+    "transform": [{
+      "filter": {"field": "trend", "equal": "positive"}
+    }],
+    "title": "Decrease                                Increase",
+    "width": 420,
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "Industry", "title": null,
+        "axis": null
+      },
+      "x": {
+        "aggregate": "sum", "field": "Difference",
+        "title": "Number of Jobs",
+        "scale": {"domain": [-20000,20000]},
+        
+        "axis": {"format": "s","tickCount": 8,"tickSize": 2}
+      },
+      "color": {
+          "field": "Difference",
+          "legend":null,
+          "type": "quantitative",
+          "title": "Response",
+          "scale": {
+            "range": ["#14213d", "#f9c74f"],
+            "type": "quantile"
+       
+        }
+      }
+    }
+  }],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"grid": true}
+  }
+}
